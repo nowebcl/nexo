@@ -47,8 +47,41 @@ const projects = [
 
 export default function Portfolio() {
     return (
-        <section className="py-32 px-6 bg-black">
-            <div className="container mx-auto">
+        <section className="relative py-32 px-6 bg-black overflow-hidden">
+            {/* Fondo Dinámico con Degradados Animados */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <motion.div
+                    animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.1, 0.2, 0.1],
+                        x: [0, 100, 0],
+                        y: [0, 50, 0],
+                    }}
+                    transition={{
+                        duration: 15,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                    className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-silver/20 blur-[150px] rounded-full"
+                />
+                <motion.div
+                    animate={{
+                        scale: [1.2, 1, 1.2],
+                        opacity: [0.1, 0.15, 0.1],
+                        x: [0, -80, 0],
+                        y: [0, -60, 0],
+                    }}
+                    transition={{
+                        duration: 18,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                    className="absolute -bottom-[10%] -right-[5%] w-[50%] h-[50%] bg-white/10 blur-[120px] rounded-full"
+                />
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
+            </div>
+
+            <div className="container mx-auto relative z-10">
                 <div className="mb-20 text-center lg:text-left">
                     <span className="text-silver/40 text-xs tracking-[0.4em] font-bold uppercase">Portafolio Elevado</span>
                     <h2 className="text-4xl md:text-6xl font-syne font-black text-white mt-4 tracking-tighter leading-none">
@@ -66,8 +99,8 @@ export default function Portfolio() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                             className={`group relative overflow-hidden rounded-[2.5rem] bg-zinc-900 border border-white/5 transition-all duration-500 hover:border-silver/40 ${project.size === "large" ? "md:col-span-8 md:row-span-2" :
-                                    project.size === "medium" ? "md:col-span-4 md:row-span-2" :
-                                        "md:col-span-4 md:row-span-1"
+                                project.size === "medium" ? "md:col-span-4 md:row-span-2" :
+                                    "md:col-span-4 md:row-span-1"
                                 }`}
                         >
                             {/* Imagen de fondo */}
