@@ -48,37 +48,34 @@ const projects = [
 export default function Portfolio() {
     return (
         <section className="relative py-32 px-6 bg-black overflow-hidden">
-            {/* Fondo Dinámico con Degradados Animados */}
+            {/* Fondo Dinámico con Degradados Animados - Optimizado */}
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <motion.div
                     animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.1, 0.2, 0.1],
-                        x: [0, 100, 0],
-                        y: [0, 50, 0],
+                        opacity: [0.05, 0.12, 0.05],
+                        x: [0, 30, 0],
+                        y: [0, 15, 0],
                     }}
                     transition={{
-                        duration: 15,
+                        duration: 6,
                         repeat: Infinity,
-                        ease: "linear"
+                        ease: "easeInOut"
                     }}
-                    className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-silver/20 blur-[150px] rounded-full"
+                    className="absolute top-[10%] left-[20%] w-[35%] h-[35%] bg-silver/10 blur-[80px] rounded-full"
                 />
                 <motion.div
                     animate={{
-                        scale: [1.2, 1, 1.2],
-                        opacity: [0.1, 0.15, 0.1],
-                        x: [0, -80, 0],
-                        y: [0, -60, 0],
+                        opacity: [0.03, 0.08, 0.03],
+                        x: [0, -25, 0],
+                        y: [0, -15, 0],
                     }}
                     transition={{
-                        duration: 18,
+                        duration: 8,
                         repeat: Infinity,
-                        ease: "linear"
+                        ease: "easeInOut"
                     }}
-                    className="absolute -bottom-[10%] -right-[5%] w-[50%] h-[50%] bg-white/10 blur-[120px] rounded-full"
+                    className="absolute bottom-[20%] right-[15%] w-[30%] h-[30%] bg-white/5 blur-[60px] rounded-full"
                 />
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
             </div>
 
             <div className="container mx-auto relative z-10">
