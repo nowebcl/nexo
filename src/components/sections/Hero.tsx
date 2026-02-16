@@ -63,6 +63,8 @@ export default function Hero() {
                             loop
                             muted
                             playsInline
+                            preload="auto"
+                            poster="https://runwips.noweb.cl/wp-content/uploads/2026/02/freepik__imagen-de-perfil-solo-con-el-isotipo__89962-scaled.jpeg"
                             className="w-full h-full object-contain relative z-10 mix-blend-screen brightness-[1.1] contrast-[1.2]"
                         >
                             <source src="https://runwips.noweb.cl/wp-content/uploads/2026/02/grok-video-7dba9f6a-69ee-4725-9538-cf536f72c393.mp4" type="video/mp4" />
