@@ -80,52 +80,58 @@ export default function ServiceBento() {
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[240px]">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:auto-rows-[240px]">
                         {/* Meta Ads Pro - Large */}
                         <motion.div
                             whileHover={{ y: -5 }}
-                            className="md:col-span-2 md:row-span-2 glass-premium rounded-[2.5rem] p-10 flex flex-col justify-between group"
+                            className="md:col-span-2 md:row-span-2 glass-premium rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-between group min-h-[320px] md:min-h-0"
                         >
-                            <div className="w-12 h-12 rounded-2xl bg-silver/10 flex items-center justify-center text-silver group-hover:scale-110 transition-transform">
+                            <div className="w-12 h-12 rounded-2xl bg-silver/10 flex items-center justify-center text-silver group-hover:scale-110 transition-transform mb-6 md:mb-0">
                                 <BarChart3 size={24} />
                             </div>
                             <div>
-                                <h3 className="text-3xl font-syne font-bold text-white mb-4">Meta Ads Pro</h3>
-                                <p className="text-white/40 font-light leading-relaxed">
+                                <h3 className="text-2xl md:text-3xl font-syne font-bold text-white mb-4">Meta Ads Pro</h3>
+                                <p className="text-white/40 font-light leading-relaxed text-sm md:text-base">
                                     No solo lanzamos anuncios. Diseñamos ecosistemas de conversión que maximizan cada peso de tu inversión, utilizando IA para predecir el comportamiento del consumidor.
                                 </p>
                             </div>
                         </motion.div>
 
-                        {/* Contenido Dinámico - Small */}
+                        {/* Contenido Dinámico - Medium (cambiado de small para mejor balance) */}
                         <motion.div
                             whileHover={{ y: -5 }}
-                            className="md:col-span-1 md:row-span-1 glass rounded-[2.5rem] p-8 flex flex-col justify-between"
+                            className="md:col-span-1 md:row-span-1 glass rounded-[2.5rem] p-8 flex flex-col justify-between min-h-[240px] md:min-h-0"
                         >
-                            <Zap className="text-silver" size={24} />
-                            <h3 className="text-xl font-bold text-white">Contenido Dinámico</h3>
+                            <Zap className="text-silver mb-4 md:mb-0" size={24} />
+                            <div>
+                                <h3 className="text-xl font-bold text-white mb-2">Media Dinámica</h3>
+                                <p className="text-white/30 text-xs leading-relaxed">Videos inmersivos y contenido de alto impacto generado con IA.</p>
+                            </div>
                         </motion.div>
 
                         {/* Crecimiento - Small */}
                         <motion.div
                             whileHover={{ y: -5 }}
-                            className="md:col-span-1 md:row-span-1 glass rounded-[2.5rem] p-8 flex flex-col justify-between"
+                            className="md:col-span-1 md:row-span-1 glass rounded-[2.5rem] p-8 flex flex-col justify-between min-h-[240px] md:min-h-0"
                         >
-                            <Users2 className="text-silver" size={24} />
-                            <h3 className="text-xl font-bold text-white">Crecimiento real</h3>
+                            <Users2 className="text-silver mb-4 md:mb-0" size={24} />
+                            <div>
+                                <h3 className="text-xl font-bold text-white mb-2">Comunidades</h3>
+                                <p className="text-white/30 text-xs leading-relaxed">Crecimiento orgánico y lealtad de marca real.</p>
+                            </div>
                         </motion.div>
 
                         {/* Digitalización PYME - Medium */}
                         <motion.div
                             whileHover={{ y: -5 }}
-                            className="md:col-span-2 md:row-span-1 glass-premium rounded-[2.5rem] p-10 flex items-center gap-8"
+                            className="md:col-span-2 md:row-span-1 glass-premium rounded-[2.5rem] p-8 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-8 min-h-[200px] md:min-h-0 text-center md:text-left"
                         >
                             <div className="shrink-0 w-16 h-16 rounded-full border border-silver/20 flex items-center justify-center text-silver">
                                 <Rocket size={28} />
                             </div>
                             <div>
                                 <h3 className="text-2xl font-bold text-white mb-1">Digitalización PYME</h3>
-                                <p className="text-white/30 text-sm font-light">Especialmente diseñado para la Región de Los Lagos.</p>
+                                <p className="text-white/40 text-sm font-light">Transformamos negocios tradicionales en potencias digitales en la Región de Los Lagos.</p>
                             </div>
                         </motion.div>
                     </div>
