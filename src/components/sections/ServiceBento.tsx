@@ -137,37 +137,6 @@ export default function ServiceBento() {
                     </div>
                 </div>
 
-                {/* PLANES DE PRECIOS */}
-                <div className="pt-20 border-t border-white/5">
-                    <div className="mb-20 text-center">
-                        <span className="text-silver/40 text-xs tracking-[0.4em] font-bold uppercase">Membresías</span>
-                        <h2 className="text-4xl md:text-5xl font-syne font-bold text-white mt-4">
-                            PLANES <span className="silver-gradient">ESTRATÉGICOS.</span>
-                        </h2>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                        {plans.map((plan, i) => (
-                            <PricingCard key={i} {...plan} />
-                        ))}
-                    </div>
-
-                    {/* Extras */}
-                    <div className="glass rounded-[2rem] p-8 flex flex-col md:flex-row items-center justify-between gap-8 border-silver/10">
-                        <div className="flex items-center gap-6">
-                            <div className="w-12 h-12 rounded-full bg-silver flex items-center justify-center text-black font-bold">
-                                +
-                            </div>
-                            <div>
-                                <h4 className="text-lg font-bold text-white tracking-tight uppercase">Potencia tu plan</h4>
-                                <p className="text-white/40 text-sm">Añade Reels adicionales y gestión de anuncios avanzada.</p>
-                            </div>
-                        </div>
-                        <div className="text-2xl font-syne font-bold text-silver">
-                            $35.000 <span className="text-xs text-white/30 uppercase tracking-widest font-normal">/ Reel Extra</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     );
