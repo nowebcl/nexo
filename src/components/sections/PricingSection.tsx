@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Check, Plus, Info, Globe, Smartphone, Megaphone } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -9,11 +10,13 @@ function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
+type Currency = "CLP" | "USD";
+
 const cmPlans = [
     {
         name: "Básico (Presencia)",
-        price: "$55.990",
-        quarterlyPrice: "$145.990",
+        price: { CLP: "$55.990", USD: "$65" },
+        quarterlyPrice: { CLP: "$145.990", USD: "$170" },
         features: [
             "Creación de redes (Instagram, Facebook, TikTok)",
             "3 posts al mes (1 por semana)",
@@ -24,8 +27,8 @@ const cmPlans = [
     },
     {
         name: "Estándar (Esencial)",
-        price: "$75.990",
-        quarterlyPrice: "$190.990",
+        price: { CLP: "$75.990", USD: "$85" },
+        quarterlyPrice: { CLP: "$190.990", USD: "$215" },
         features: [
             "Creación de redes (IG, FB, TikTok)",
             "6 posts y 6 stories al mes",
@@ -37,8 +40,8 @@ const cmPlans = [
     },
     {
         name: "Pro (Crecimiento)",
-        price: "$150.990",
-        quarterlyPrice: "$310.990",
+        price: { CLP: "$150.990", USD: "$165" },
+        quarterlyPrice: { CLP: "$310.990", USD: "$345" },
         features: [
             "Creación de redes (IG, FB, TikTok)",
             "10 posts, 5 stories y 2 reels al mes",
@@ -53,7 +56,7 @@ const cmPlans = [
 const webServices = [
     {
         title: "Página Web Básica",
-        price: "$30.000",
+        price: { CLP: "$30.000", USD: "$35" },
         icon: Globe,
         features: [
             "Diseño único impulsado por IA",
@@ -63,7 +66,7 @@ const webServices = [
     },
     {
         title: "Web + Dominio",
-        price: "$50.000",
+        price: { CLP: "$50.000", USD: "$55" },
         icon: Smartphone,
         features: [
             "Diseño único con IA",
@@ -73,29 +76,31 @@ const webServices = [
     },
     {
         title: "Pack Web + Redes",
-        price: "$65.000",
+        price: { CLP: "$65.000", USD: "$75" },
         icon: Megaphone,
         features: [
             "Diseño web IA + WhatsApp",
             "Plan 1 CM (Básico) incluido",
-            "Requiere 30% adelantado ($19.500)",
+            "Requiere 30% adelantado",
         ],
     },
 ];
 
 const extras = [
-    { name: "Reel extra", price: "$20.000" },
-    { name: "Pack 8 stories extra", price: "$20.000" },
-    { name: "Logos básicos", price: "$15.000" },
-    { name: "Soporte web", price: "$30.000/mes" },
+    { name: "Reel extra", price: { CLP: "$20.000", USD: "$25" } },
+    { name: "Pack 8 stories extra", price: { CLP: "$20.000", USD: "$25" } },
+    { name: "Logos básicos", price: { CLP: "$15.000", USD: "$18" } },
+    { name: "Soporte web", price: { CLP: "$30.000/mes", USD: "$35/mo" } },
 ];
 
 export default function PricingSection() {
+    const [currency, setCurrency] = useState<Currency>("CLP");
+
     return (
         <section className="py-24 px-6 bg-obsidian relative overflow-hidden" id="planes">
             <div className="container mx-auto relative z-10">
                 {/* Header Section */}
-                <div className="text-center mb-20">
+                <div className="flex flex-col items-center mb-20">
                     <motion.span
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -109,10 +114,33 @@ export default function PricingSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-6xl font-syne font-bold text-white mt-4"
+                        className="text-4xl md:text-6xl font-syne font-bold text-white mt-4 mb-8 text-center"
                     >
                         PLANES Y <span className="silver-gradient">SERVICIOS.</span>
                     </motion.h2>
+
+                    {/* Currency Toggle */}
+                    <div className="flex items-center gap-3 p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl">
+                        {(["CLP", "USD"] as const).map((curr) => (
+                            <button
+                                key={curr}
+                                onClick={() => setCurrency(curr)}
+                                className={cn(
+                                    "px-6 py-2 rounded-xl text-xs font-bold transition-all duration-300 relative",
+                                    currency === curr ? "text-obsidian" : "text-white/40 hover:text-white"
+                                )}
+                            >
+                                {currency === curr && (
+                                    <motion.div
+                                        layoutId="active-curr"
+                                        className="absolute inset-0 bg-silver rounded-xl"
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                                <span className="relative z-10">{curr}</span>
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 {/* 1. Community Manager Section */}
@@ -155,13 +183,36 @@ export default function PricingSection() {
                                         {plan.name}
                                     </h4>
                                     <div className="flex items-baseline gap-1 mb-2">
-                                        <span className="text-4xl font-syne font-bold text-white">{plan.price}</span>
+                                        <AnimatePresence mode="wait">
+                                            <motion.span
+                                                key={currency}
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: -10 }}
+                                                className="text-4xl font-syne font-bold text-white"
+                                            >
+                                                {plan.price[currency]}
+                                            </motion.span>
+                                        </AnimatePresence>
                                         <span className="text-white/30 text-sm">/mes</span>
                                     </div>
                                     <div className="inline-block px-3 py-1 rounded-lg bg-silver/10 border border-silver/20">
-                                        <p className="text-[10px] text-silver font-medium uppercase tracking-wider">
-                                            Oferta Trimestral: <span className="text-white">{plan.quarterlyPrice}</span>
-                                        </p>
+                                        <div className="flex items-center gap-1.5">
+                                            <p className="text-[10px] text-silver font-medium uppercase tracking-wider">
+                                                Oferta Trimestral:
+                                            </p>
+                                            <AnimatePresence mode="wait">
+                                                <motion.span
+                                                    key={currency}
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    exit={{ opacity: 0 }}
+                                                    className="text-[10px] text-white font-bold"
+                                                >
+                                                    {plan.quarterlyPrice[currency]}
+                                                </motion.span>
+                                            </AnimatePresence>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -180,7 +231,7 @@ export default function PricingSection() {
                                 </div>
 
                                 <a
-                                    href={`https://wa.me/56948991909?text=Hola!%20Me%20interesa%20el%20Plan%20CM%20${plan.name}`}
+                                    href={`https://wa.me/56948991909?text=Hola!%20Me%20interesa%20el%20Plan%20CM%20${plan.name}%20en%20${currency}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={cn(
@@ -221,7 +272,17 @@ export default function PricingSection() {
                                     <service.icon size={24} />
                                 </div>
                                 <h4 className="text-xl font-bold text-white mb-2">{service.title}</h4>
-                                <div className="text-3xl font-syne font-bold text-silver mb-6">{service.price}</div>
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={currency}
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: 10 }}
+                                        className="text-3xl font-syne font-bold text-silver mb-6"
+                                    >
+                                        {service.price[currency]}
+                                    </motion.div>
+                                </AnimatePresence>
                                 <div className="space-y-3 mb-8">
                                     {service.features.map((f, idx) => (
                                         <div key={idx} className="flex items-center gap-2 text-white/40 text-sm">
@@ -231,7 +292,7 @@ export default function PricingSection() {
                                     ))}
                                 </div>
                                 <a
-                                    href={`https://wa.me/56948991909?text=Hola!%20Me%20interesa%20el%20servicio%3A%20${service.title}`}
+                                    href={`https://wa.me/56948991909?text=Hola!%20Me%20interesa%20el%20servicio%3A%20${service.title}%20en%20${currency}`}
                                     className="text-xs font-bold text-silver uppercase tracking-widest hover:text-white transition-colors"
                                 >
                                     Solicitar ahora →
@@ -256,9 +317,19 @@ export default function PricingSection() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             {extras.map((extra, i) => (
-                                <div key={i} className="flex justify-between items-center p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-silver/20 transition-all">
-                                    <span className="text-white/60 text-sm">{extra.name}</span>
-                                    <span className="text-silver font-bold text-sm tracking-tighter">{extra.price}</span>
+                                <div key={i} className="flex justify-between items-center p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-silver/20 transition-all group">
+                                    <span className="text-white/60 text-sm group-hover:text-white transition-colors">{extra.name}</span>
+                                    <AnimatePresence mode="wait">
+                                        <motion.span
+                                            key={currency}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            className="text-silver font-bold text-sm tracking-tighter"
+                                        >
+                                            {extra.price[currency]}
+                                        </motion.span>
+                                    </AnimatePresence>
                                 </div>
                             ))}
                         </div>
