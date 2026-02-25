@@ -156,17 +156,6 @@ export default function PricingSection() {
                             ))}
                         </div>
 
-                        {/* Subtle hint arrow/indicator */}
-                        <motion.div
-                            animate={{ y: [0, 5, 0] }}
-                            transition={{ repeat: Infinity, duration: 2 }}
-                            className="absolute -right-12 top-1/2 -translate-y-1/2 hidden xl:block"
-                        >
-                            <div className="flex flex-col items-center">
-                                <span className="text-[9px] text-silver/40 vertical-text font-bold tracking-widest uppercase mb-2">Cambiar moneda</span>
-                                <Plus className="text-silver/40 rotate-45" size={14} />
-                            </div>
-                        </motion.div>
                     </motion.div>
                 </div>
 
