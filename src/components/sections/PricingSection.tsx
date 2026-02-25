@@ -119,28 +119,55 @@ export default function PricingSection() {
                         PLANES Y <span className="silver-gradient">SERVICIOS.</span>
                     </motion.h2>
 
-                    {/* Currency Toggle */}
-                    <div className="flex items-center gap-3 p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl">
-                        {(["CLP", "USD"] as const).map((curr) => (
-                            <button
-                                key={curr}
-                                onClick={() => setCurrency(curr)}
-                                className={cn(
-                                    "px-6 py-2 rounded-xl text-xs font-bold transition-all duration-300 relative",
-                                    currency === curr ? "text-obsidian" : "text-white/40 hover:text-white"
-                                )}
-                            >
-                                {currency === curr && (
-                                    <motion.div
-                                        layoutId="active-curr"
-                                        className="absolute inset-0 bg-silver rounded-xl"
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                                <span className="relative z-10">{curr}</span>
-                            </button>
-                        ))}
-                    </div>
+                    {/* Currency Toggle - Much more prominent */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        className="relative p-1"
+                    >
+                        <div className="text-center mb-4">
+                            <span className="text-[10px] text-silver font-bold uppercase tracking-[0.3em] bg-silver/10 px-3 py-1 rounded-full border border-silver/20">
+                                Selecciona tu moneda
+                            </span>
+                        </div>
+
+                        <div className="flex items-center gap-2 p-2 rounded-[2rem] bg-white/5 border-2 border-white/10 backdrop-blur-2xl shadow-[0_0_50px_rgba(168,169,173,0.1)]">
+                            {(["CLP", "USD"] as const).map((curr) => (
+                                <button
+                                    key={curr}
+                                    onClick={() => setCurrency(curr)}
+                                    className={cn(
+                                        "px-10 py-4 rounded-[1.5rem] text-sm font-black transition-all duration-500 relative flex items-center gap-3",
+                                        currency === curr ? "text-obsidian" : "text-white/40 hover:text-white"
+                                    )}
+                                >
+                                    {currency === curr && (
+                                        <motion.div
+                                            layoutId="active-curr"
+                                            className="absolute inset-0 bg-silver rounded-[1.5rem] shadow-[0_0_20px_rgba(168,169,173,0.4)]"
+                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        />
+                                    )}
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        {curr === "CLP" ? "🇨🇱 " : "🇺🇸 "}
+                                        {curr === "CLP" ? "PESO CHILENO" : "DÓLAR (USD)"}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Subtle hint arrow/indicator */}
+                        <motion.div
+                            animate={{ y: [0, 5, 0] }}
+                            transition={{ repeat: Infinity, duration: 2 }}
+                            className="absolute -right-12 top-1/2 -translate-y-1/2 hidden xl:block"
+                        >
+                            <div className="flex flex-col items-center">
+                                <span className="text-[9px] text-silver/40 vertical-text font-bold tracking-widest uppercase mb-2">Cambiar moneda</span>
+                                <Plus className="text-silver/40 rotate-45" size={14} />
+                            </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
 
                 {/* 1. Community Manager Section */}
